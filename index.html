@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tabia Alam — Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <!-- AOS (Animate on Scroll) -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <style>
+    :root{
+      --bg:#0f1226;
+      --card:#161a38;
+      --muted:#a9b0c6;
+      --acc:#6c7bff;
+      --acc2:#00d2d3;
+      --text:#eef1ff;
+    }
+    html{scroll-behavior:smooth;}
+    body{
+      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 80% -20%, rgba(108,123,255,.25), transparent),
+                  radial-gradient(1000px 600px at -10% 0%, rgba(0,210,211,.2), transparent),
+                  var(--bg);
+      color: var(--text);
+    }
+    .navbar{
+      background: rgba(15,18,38,.6)!important;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav-link{ color:#dfe3ff !important; opacity:.9 }
+    .nav-link:hover{ opacity:1 }
+    /* Hero */
+    .hero{
+      min-height: 92vh;
+      display:flex; align-items:center;
+      position:relative; overflow:hidden;
+    }
+    .blob{
+      position:absolute; width:480px; height:480px;
+      background: radial-gradient(circle at 30% 30%, var(--acc), transparent 60%),
+                  radial-gradient(circle at 70% 70%, var(--acc2), transparent 60%);
+      filter: blur(60px); opacity:.35; border-radius:40%;
+      animation: float 12s ease-in-out infinite alternate;
+      top:-120px; right:-120px; z-index:0;
+    }
+    @keyframes float { to { transform: translate(-20px, 30px) rotate(10deg);} }
+    .hero h1{ font-weight:700; letter-spacing:.5px }
+    .tagline{
+      font-size:1.1rem; color: var(--muted);
+      max-width:720px
+    }
+    .btn-accent{
+      background: linear-gradient(135deg, var(--acc), var(--acc2));
+      border: none; color:white;
+      box-shadow: 0 8px 24px rgba(0,0,0,.25);
+    }
+    .btn-accent:hover{ filter: brightness(1.05); }
+    .avatar{
+      width:140px; height:140px; border-radius:50%;
+      object-fit:cover; border:3px solid rgba(255,255,255,.25);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35)
+    }
+    /* Sections */
+    section{ padding: 90px 0 }
+    .section-title{ font-weight:700; margin-bottom: .75rem }
+    .section-sub{ color: var(--muted); margin-bottom: 2rem }
+    /* Cards */
+    .card-neo{
+      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px; padding: 24px; height:100%;
+      box-shadow: 0 10px 35px rgba(0,0,0,.25);
+    }
+    .pill{
+      padding: .35rem .7rem; border-radius:999px;
+      background: rgba(255,255,255,.07);
+      color: #dfe3ff; font-size:.8rem; margin-right:.35rem
+    }
+    /* Timeline */
+    .timeline{
+      position:relative; padding-left: 28px;
+    }
+    .timeline::before{
+      content:""; position:absolute; top:0; left:8px; bottom:0;
+      width:2px; background: linear-gradient(var(--acc), var(--acc2));
+      opacity:.4
+    }
+    .t-item{ position:relative; margin-bottom: 28px }
+    .t-item::before{
+      content:""; position:absolute; left:-2px; top:6px;
+      width:14px; height:14px; background: linear-gradient(135deg, var(--acc), var(--acc2));
+      border-radius:50%; box-shadow: 0 0 0 4px rgba(108,123,255,.15);
+    }
+    .muted{ color: var(--muted) }
+    .project-card{
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px; overflow:hidden; background: #101432;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .project-card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,.35) }
+    .project-img{ aspect-ratio: 16/10; object-fit: cover; width:100% }
+    .project-body{ padding:18px }
+    .skills i{ font-size: 1.25rem; margin-right: .5rem }
+    footer{ border-top:1px solid rgba(255,255,255,.08); color: var(--muted) }
+    /* Contact */
+    .form-control, .form-select{
+      background:#0e1330; border:1px solid rgba(255,255,255,.12); color:#fff
+    }
+    .form-control::placeholder{ color:#94a1c2 }
+    .form-control:focus{ box-shadow:none; border-color: var(--acc2) }
+    /* Typewriter */
+    .typewriter > .text{ border-right: .12em solid rgba(255,255,255,.65); white-space:nowrap; overflow:hidden }
+    /* Utilities */
+    .link-muted{ color: #cfd6ff; text-decoration:none }
+    .link-muted:hover{ color: #fff }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark py-3">
+    <div class="container">
+      <a class="navbar-brand fw-semibold" href="#home">Tabia Alam</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="home" class="hero">
+    <div class="blob"></div>
+    <div class="container position-relative" style="z-index:1">
+      <div class="row align-items-center gy-4">
+        <div class="col-lg-8">
+          <div class="d-flex gap-3 align-items-center mb-3">
+            <img src="images/tabi.jpeg" class="avatar" alt="Tabia photo placeholder" />
+            <div>
+              <h1 class="display-5 mb-1">Tabia Alam</h1>
+              <div class="typewriter">
+                <span class="text h6 text-white-50" id="typewriter"></span>
+              </div>
+            </div>
+          </div>
+          <p class="tagline">
+            Hi, I’m Tabia — I speak fluent SQL, dabble in React & Node, and occasionally convince Flutter to behave. I love turning messy data into dashboards that actually make sense and building apps that don’t just work, but look good doing it. 
+          </p>
+          <div class="d-flex gap-2 mt-3">
+            <a href="#projects" class="btn btn-accent px-4">View Projects</a>
+            <a href="#contact" class="btn btn-outline-light px-4">Contact Me</a>
+          </div>
+          <div class="mt-4 skills d-flex flex-wrap align-items-center gap-3 muted">
+            <span class="pill"><i class="fa-brands fa-react"></i> React</span>
+            <span class="pill"><i class="fa-brands fa-node-js"></i> Node/Express</span>
+            <span class="pill"><i class="fa-solid fa-database"></i> MySQL/SQL</span>
+            <span class="pill"><i class="fa-solid fa-chart-simple"></i> Power BI</span>
+            <span class="pill"><i class="fa-brands fa-php"></i> PHP</span>
+            <span class="pill"><i class="fa-brands fa-android"></i> Flutter/Dart</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-sub">
+        I’m a curious developer with a love for solving problems and turning ideas into real, working projects. My journey started with learning the basics of code and quickly grew into building full-stack web apps, crafting mobile apps with Flutter, and designing dashboards that make data actually fun to look at. I enjoy exploring new tools, experimenting with creative solutions, and always pushing myself to learn something new. Outside of code, I’m all about growth, creativity, and bringing a bit of personality into everything I do.
+      </p>
+
+      <div class="row g-4">
+        <div class="col-lg-7">
+          <div class="card-neo">
+            <h5 class="mb-3">Objective</h5>
+            <p class="mb-0">
+              Dedicated IT professional skilled in SQL, Power BI, and Flutter. Seeking to leverage experience in dashboards,
+              data analysis, and system integrations to deliver efficient, scalable solutions.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="card-neo h-100">
+            <h5 class="mb-3">Contact Snapshot</h5>
+            <ul class="list-unstyled mb-0">
+              <li class="mb-2"><i class="fa-solid fa-location-dot me-2"></i> Karachi, Pakistan</li>
+              <li class="mb-2"><i class="fa-solid fa-envelope me-2"></i>
+                <a class="link-muted" href="mailto:tabiya.alam2415@gmail.com">tabiya.alam2415@gmail.com</a>
+              </li>
+              <li class="mb-2"><i class="fa-solid fa-phone me-2"></i> +92 315 1084955</li>
+              <li class="mb-2"><i class="fa-brands fa-linkedin me-2"></i>
+                <a class="link-muted" href="#" target="_blank">LinkedIn</a>
+              </li>
+              <li class="mb-2"><i class="fa-brands fa-github me-2"></i>
+                <a class="link-muted" href="#" target="_blank">GitHub</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4 mt-1">
+        <div class="col-lg-6">
+          <div class="card-neo">
+            <h5 class="mb-3">Technical Skills</h5>
+            <div class="row">
+              <div class="col-6">
+                <ul class="mb-2">
+                  <li>React, Node.js, Express</li>
+                  <li>HTML, CSS, JS, PHP</li>
+                  <li>Flutter, Dart, OOP</li>
+                </ul>
+              </div>
+              <div class="col-6">
+                <ul class="mb-2">
+                  <li>SQL, Crystal Reports</li>
+                  <li>Advanced Excel, Python</li>
+                  <li>VS Code, Power BI, C/C++</li>
+                </ul>
+              </div>
+            </div>
+            <div class="small muted"><b>Certifications:</b>  MERN, Flutter & Dart, SQL Advanced, JavaScript</div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card-neo h-100">
+            <h5 class="mb-3">What I Love Building</h5>
+            <ul class="mb-0">
+              <li>Relational database schemas and secure APIs</li>
+              <li>Insightful dashboards (Power BI, Python, Excel)</li>
+              <li>Clean, responsive web UIs and mobile apps</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section-title">Experience</h2>
+      <p class="section-sub">A timeline of roles, responsibilities and impact.</p>
+
+      <div class="timeline">
+        <div class="t-item">
+          <div class="card-neo">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="mb-1">Sui Southern Gas Company Limited — Technical Staff</h5>
+              <span class="muted">Dec 2023 – Present</span>
+            </div>
+            <ul class="mb-0">
+              <li>Developed dashboards, ad-hoc reports, and SQL queries</li>
+              <li>Managed SMS integration project with automated responses via API + templates</li>
+            </ul>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="card-neo">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="mb-1">Sui Southern Gas Company Limited — Apprentice</h5>
+              <span class="muted">Nov 2023 – Oct 2024</span>
+            </div>
+            <ul class="mb-0">
+              <li>Reporting and dashboard work using SQL and Crystal Reports</li>
+              <li>Supported data analysis and visualization needs for management</li>
+            </ul>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="card-neo">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="mb-1">Brandverse Chikoo — Flutter Intern</h5>
+              <span class="muted">Oct 2023</span>
+            </div>
+            <ul class="mb-0">
+              <li>Worked on mobile app UI and state management using Flutter & Dart</li>
+            </ul>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="card-neo">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="mb-1">Bright Code X — Front-end development</h5>
+              <span class="muted">Aug 2021 – Feb 2023</span>
+            </div>
+            <ul class="mb-0">
+              <li>Built multiple static/interactive websites with HTML, CSS, JavaScript</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section-title">Projects</h2>
+      <p class="section-sub">Selected work across database design, full‑stack development, dashboards, and machine learning.</p>
+
+      <div class="row g-4">
+        <!-- CMS -->
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card h-100">
+            <img class="project-img" src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1200&auto=format&fit=crop" alt="CMS project" />
+            <div class="project-body">
+              <h5 class="mb-1">Complaint Management System</h5>
+              <div class="small muted mb-2">React • Node • MySQL</div>
+              <p class="mb-2">Role-based dashboards for supervisors & fitters with assignment workflow and normalized schema.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-sm btn-accent" href="cms.html" target="_blank">Live / Demo</a>
+                <a class="btn btn-sm btn-outline-light" href="https://github.com/tabiaa/cms" target="_blank">GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Form CRUD -->
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card h-100">
+            <img class="project-img" src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop" alt="Form CRUD" />
+            <div class="project-body">
+              <h5 class="mb-1">Form Submission & Records</h5>
+              <div class="small muted mb-2">HTML • CSS • JS • PHP</div>
+              <p class="mb-2">Simple full‑stack CRUD app where users submit a form and admins view/update records.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-sm btn-accent" href="phpfrom.html" target="_blank">Live / Demo</a>
+                <a class="btn btn-sm btn-outline-light" href="#" target="_blank">GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Flutter -->
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card h-100">
+            <img class="project-img" src="https://images.unsplash.com/photo-1520975682031-a6b570bfa3be?q=80&w=1200&auto=format&fit=crop" alt="Flutter Book App" />
+            <div class="project-body">
+              <h5 class="mb-1">Flutter Book Reading App</h5>
+              <div class="small muted mb-2">Flutter • Dart</div>
+              <p class="mb-2">Lightweight reading & library app built while learning Flutter.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-sm btn-accent" href="#" target="_blank">Screenshots</a>
+                <a class="btn btn-sm btn-outline-light" href="#" target="_blank">GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- BI Dashboard -->
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card h-100">
+            <img class="project-img" src="https://images.unsplash.com/photo-1551281044-8d8d15c0a7a3?q=80&w=1200&auto=format&fit=crop" alt="Power BI Dashboard" />
+            <div class="project-body">
+              <h5 class="mb-1">Power BI Dashboard</h5>
+              <div class="small muted mb-2">Power BI</div>
+              <p class="mb-2">Interactive KPI tracking with filters and drill‑downs for management reporting.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-sm btn-accent" href="#" target="_blank">Preview</a>
+                <a class="btn btn-sm btn-outline-light" href="#" target="_blank">Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Python Viz -->
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card h-100">
+            <img class="project-img" src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1200&auto=format&fit=crop" alt="Python Dashboard" />
+            <div class="project-body">
+              <h5 class="mb-1">Python Data Dashboard</h5>
+              <div class="small muted mb-2">Pandas • Matplotlib / Plotly</div>
+              <p class="mb-2">Scripted reporting pipeline with visual insights and exportable charts.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-sm btn-accent" href="#" target="_blank">Preview</a>
+                <a class="btn btn-sm btn-outline-light" href="#" target="_blank">GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Predictive -->
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card h-100">
+            <img class="project-img" src="https://images.unsplash.com/photo-1534759846116-57968a6f1c58?q=80&w=1200&auto=format&fit=crop" alt="Predictive ML" />
+            <div class="project-body">
+              <h5 class="mb-1">Predictive Analysis (Python)</h5>
+              <div class="small muted mb-2">scikit‑learn • Jupyter</div>
+              <p class="mb-2">Classification/regression mini‑projects with model evaluation and feature insights.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-sm btn-accent" href="#" target="_blank">Notebook</a>
+                <a class="btn btn-sm btn-outline-light" href="#" target="_blank">GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Excel -->
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card h-100">
+            <img class="project-img" src="https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=1200&auto=format&fit=crop" alt="Excel Dashboards" />
+            <div class="project-body">
+              <h5 class="mb-1">Excel Dashboards</h5>
+              <div class="small muted mb-2">Pivot • Power Query</div>
+              <p class="mb-2">Dynamic dashboards with slicers and automated refresh for ops & finance teams.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-sm btn-accent" href="#" target="_blank">Preview</a>
+                <a class="btn btn-sm btn-outline-light" href="#" target="_blank">Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- DB Design -->
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card h-100">
+            <img class="project-img" src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop" alt="DB Design" />
+            <div class="project-body">
+              <h5 class="mb-1">Database Design (MySQL)</h5>
+              <div class="small muted mb-2">ERD • Normalization • FKs</div>
+              <p class="mb-2">Professional schemas for e‑commerce and complaint management systems.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-sm btn-accent" href="#" target="_blank">ERD</a>
+                <a class="btn btn-sm btn-outline-light" href="#" target="_blank">schema.sql</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section-title">Education</h2>
+      <p class="section-sub">Academic journey & credentials.</p>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="card-neo h-100">
+            <h5 class="mb-1">BSCS (3rd Year)</h5>
+            <div class="muted mb-2">University of Karachi • 2025–2026</div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-neo h-100">
+            <h5 class="mb-1">BCS (Hons), 6 Semesters</h5>
+            <div class="muted mb-2">DJ Sindh Science College • 2021–2024</div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-neo h-100">
+            <h5 class="mb-1">Diploma in Associate Engineering (IT)</h5>
+            <div class="muted mb-2">Govt. College of Technology for Girls • 2019–2021</div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-neo h-100">
+            <h5 class="mb-1">Intermediate (Pre‑Engineering)</h5>
+            <div class="muted mb-2">Shaheed‑e‑Millat • 2019–2020</div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-neo h-100">
+            <h5 class="mb-1">Matric (Computer Science)</h5>
+            <div class="muted mb-2">St. Joseph Convent School • 2017–2018</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-sub">Let’s connect! I’m open to roles, collaborations and freelance work.</p>
+
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <form class="card-neo">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Name</label>
+                <input class="form-control" placeholder="Your name" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" placeholder="you@example.com" />
+              </div>
+              <div class="col-12">
+                <label class="form-label">Message</label>
+                <textarea rows="4" class="form-control" placeholder="Say hello 👋"></textarea>
+              </div>
+              <div class="col-12 d-flex gap-2">
+                <button type="button" class="btn btn-accent px-4">Send</button>
+                <a href="#" class="btn btn-outline-light px-4" target="_blank"><i class="fa-brands fa-linkedin me-2"></i>LinkedIn</a>
+                <a href="#" class="btn btn-outline-light px-4" target="_blank"><i class="fa-brands fa-github me-2"></i>GitHub</a>
+              </div>
+              <div class="small muted mt-2">Note: This demo form is static. Hook it to EmailJS, Formspree, or a simple backend.</div>
+            </div>
+          </form>
+        </div>
+        <div class="col-lg-6">
+          <div class="card-neo h-100 d-flex align-items-center justify-content-center text-center p-4">
+            <div>
+              <h5 class="mb-2">Quick Links</h5>
+              <p class="muted mb-3">Downloadable assets for recruiters.</p>
+              <div class="d-flex flex-wrap gap-2 justify-content-center">
+                <a class="btn btn-outline-light" href="#" target="_blank"><i class="fa-solid fa-file-lines me-2"></i>Resume (PDF)</a>
+                <a class="btn btn-outline-light" href="#" target="_blank"><i class="fa-solid fa-database me-2"></i>schema.sql</a>
+                <a class="btn btn-outline-light" href="#" target="_blank"><i class="fa-solid fa-diagram-project me-2"></i>ERD</a>
+              </div>
+              <div class="muted small mt-3">Replace links with your actual files.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-4 text-center">
+    <div class="container">
+      <div class="small">© 2025 Tabia Alam — All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- JS: Bootstrap + AOS + Typewriter -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ once: true, duration: 800, offset: 80 });
+
+    // Simple typewriter
+    const el = document.getElementById('typewriter');
+    const roles = [
+      'SQL • Power BI • Flutter',
+      'Full‑Stack Developer (React / Node)',
+      'Database Designer & Data Analyst'
+    ];
+    let i = 0, j = 0, deleting = false, pause = 1200;
+    function tick(){
+      const word = roles[i];
+      if(!deleting){
+        el.textContent = word.slice(0, j++);
+        if(j > word.length){ deleting = true; setTimeout(tick, pause); return; }
+      } else {
+        el.textContent = word.slice(0, j--);
+        if(j === 0){ deleting = false; i = (i+1) % roles.length; }
+      }
+      setTimeout(tick, deleting ? 40 : 70);
+    }
+    tick();
+  </script>
+</body>
+</html>
