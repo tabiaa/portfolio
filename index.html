@@ -70,7 +70,7 @@
       box-shadow: 0 10px 30px rgba(0,0,0,.35)
     }
     /* Sections */
-    section{ padding: 90px 0 }
+    section{ padding: 40px 0 }
     .section-title{ font-weight:700; margin-bottom: .75rem }
     .section-sub{ color: var(--muted); margin-bottom: 2rem }
     /* Cards */
@@ -139,6 +139,7 @@
           <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
           <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="images/CV.pdf">Resume</a></li>
         </ul>
       </div>
     </div>
@@ -484,7 +485,7 @@
             <div class="muted mb-2">Govt. College of Technology for Girls • 2019–2021</div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4">
+        <!-- <div class="col-md-6 col-lg-4">
           <div class="card-neo h-100">
             <h5 class="mb-1">Intermediate (Pre‑Engineering)</h5>
             <div class="muted mb-2">Shaheed‑e‑Millat • 2019–2020</div>
@@ -496,58 +497,76 @@
             <div class="muted mb-2">St. Joseph Convent School • 2017–2018</div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact">
-    <div class="container" data-aos="fade-up">
-      <h2 class="section-title">Contact</h2>
-      <p class="section-sub">Let’s connect! I’m open to roles, collaborations and freelance work.</p>
+  <!-- CONTACT -->
+<section id="contact">
+  <div class="container" data-aos="fade-up">
+    <h2 class="section-title">Contact</h2>
+    <p class="section-sub">Let’s connect! I’m open to roles, collaborations and freelance work.</p>
 
-      <div class="row g-4">
-        <div class="col-lg-6">
-          <form class="card-neo">
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label class="form-label">Name</label>
-                <input class="form-control" placeholder="Your name" />
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control" placeholder="you@example.com" />
-              </div>
-              <div class="col-12">
-                <label class="form-label">Message</label>
-                <textarea rows="4" class="form-control" placeholder="Say hello 👋"></textarea>
-              </div>
-              <div class="col-12 d-flex gap-2">
-                <button type="button" class="btn btn-accent px-4">Send</button>
-                <a href="#" class="btn btn-outline-light px-4" target="_blank"><i class="fa-brands fa-linkedin me-2"></i>LinkedIn</a>
-                <a href="#" class="btn btn-outline-light px-4" target="_blank"><i class="fa-brands fa-github me-2"></i>GitHub</a>
-              </div>
-              <div class="small muted mt-2">Note: This demo form is static. Hook it to EmailJS, Formspree, or a simple backend.</div>
+    <div class="row g-4">
+      <!-- Contact Form -->
+      <div class="col-lg-6">
+        <form class="card-neo" action="https://formspree.io/f/mwpqjbro" method="POST">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Name</label>
+              <input type="text" name="name" class="form-control" placeholder="Your name" required />
             </div>
-          </form>
-        </div>
-        <div class="col-lg-6">
-          <div class="card-neo h-100 d-flex align-items-center justify-content-center text-center p-4">
-            <div>
-              <h5 class="mb-2">Quick Links</h5>
-              <p class="muted mb-3">Downloadable assets for recruiters.</p>
-              <div class="d-flex flex-wrap gap-2 justify-content-center">
-                <a class="btn btn-outline-light" href="#" target="_blank"><i class="fa-solid fa-file-lines me-2"></i>Resume (PDF)</a>
-                <a class="btn btn-outline-light" href="#" target="_blank"><i class="fa-solid fa-database me-2"></i>schema.sql</a>
-                <a class="btn btn-outline-light" href="#" target="_blank"><i class="fa-solid fa-diagram-project me-2"></i>ERD</a>
-              </div>
-              <div class="muted small mt-3">Replace links with your actual files.</div>
+            <div class="col-md-6">
+              <label class="form-label">Email</label>
+              <input type="email" name="email" class="form-control" placeholder="you@example.com" required />
             </div>
+            <div class="col-12">
+              <label class="form-label">Message</label>
+              <textarea name="message" rows="4" class="form-control" placeholder="Say hello 👋" required></textarea>
+            </div>
+            <div class="col-12 d-flex gap-2">
+              <button type="submit" class="btn btn-accent px-4">Send</button>
+             
+            </div>
+            <div class="small muted mt-2">Your message will be sent directly to my email 📩</div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-lg-6">
+        <div class="card-neo h-100 d-flex align-items-center justify-content-center text-center p-4">
+          <div>
+            <h5 class="mb-2">Quick Links</h5>
+            <p class="muted mb-3">Download my resume and view my profiles.</p>
+            <div class="d-flex flex-wrap gap-2 justify-content-center">
+              <!-- Resume Download -->
+              <a class="btn btn-outline-light" href="images/CV.pdf" download="Tabia_Resume.pdf">
+                <i class="fa-solid fa-file-lines me-2"></i>Resume (PDF)
+              </a>
+               <a href="https://www.linkedin.com/in/YOUR-LINKEDIN" class="btn btn-outline-light px-4" target="_blank">
+                <i class="fa-brands fa-linkedin me-2"></i>LinkedIn
+              </a>
+              <a href="https://github.com/YOUR-GITHUB" class="btn btn-outline-light px-4" target="_blank">
+                <i class="fa-brands fa-github me-2"></i>GitHub
+              </a>
+              <!-- Other Files -->
+              <!-- <a class="btn btn-outline-light" href="files/schema.sql" download>
+                <i class="fa-solid fa-database me-2"></i>schema.sql
+              </a>
+              <a class="btn btn-outline-light" href="files/ERD.png" download>
+                <i class="fa-solid fa-diagram-project me-2"></i>ERD
+              </a> -->
+            </div>
+            <!-- <div class="muted small mt-3">Replace with your actual files in <code>/images</code> or <code>/files</code> folder.</div> -->
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <footer class="py-4 text-center">
     <div class="container">
